@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hikal's Company | خدمات طبية متكاملة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0d1f3c;
+    --teal: #1a6b72;
+    --teal-light: #22909a;
+    --blue: #1a4fa0;
+    --blue-light: #2563d4;
+    --gold: #c9a96e;
+    --gold-light: #e2c896;
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --white: #ffffff;
+    --gray: #8a9ab5;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--navy); color:var(--white); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    padding:1.2rem 5%; display:flex; align-items:center; justify-content:space-between;
+    background:rgba(10,22,40,0.92); backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(201,169,110,0.18); transition:all 0.4s;
+  }
+  .logo { display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
+  .logo-icon {
+    width:40px; height:40px; border-radius:8px;
+    background:linear-gradient(135deg,var(--blue),var(--teal));
+    display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  }
+  .logo-text { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--gold); letter-spacing:0.06em; }
+  .logo-text span { color:rgba(255,255,255,0.6); font-weight:300; font-size:1rem; display:block; line-height:1; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { text-decoration:none; color:rgba(255,255,255,0.75); font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; font-weight:500; transition:color 0.3s; }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-phone {
+    display:flex; align-items:center; gap:0.5rem;
+    background:var(--gold); color:var(--navy); padding:0.55rem 1.2rem;
+    border-radius:4px; font-weight:700; font-size:0.88rem; text-decoration:none; transition:all 0.3s;
+  }
+  .nav-phone:hover { background:var(--gold-light); transform:translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center;
+    padding:6rem 5% 4rem; gap:4rem;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 40%, rgba(26,79,160,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(26,107,114,0.15) 0%, transparent 50%),
+      linear-gradient(160deg,#0a1628 0%,#0d1f3c 100%);
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-150px; right:-150px;
+    width:600px; height:600px; border-radius:50%;
+    border:1px solid rgba(201,169,110,0.08); animation:rotate 40s linear infinite;
+  }
+  .hero::after {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:400px; height:400px; border-radius:50%;
+    border:1px solid rgba(26,79,160,0.12); animation:rotate 25s linear infinite reverse;
+  }
+  @keyframes rotate { to { transform:rotate(360deg); } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  .hero-content { position:relative; z-index:2; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(201,169,110,0.12); border:1px solid rgba(201,169,110,0.3);
+    color:var(--gold); padding:0.4rem 1rem; border-radius:50px;
+    font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:600;
+    margin-bottom:1.5rem; animation:fadeUp 1s ease both;
+  }
+  h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.8rem,5.5vw,5rem); line-height:1.08; font-weight:300;
+    margin-bottom:1rem; animation:fadeUp 1s 0.1s ease both;
+  }
+  h1 em { color:var(--teal-light); font-style:italic; }
+  h1 strong { color:var(--gold); font-weight:600; display:block; }
+  .hero-arabic {
+    font-size:1.1rem; color:rgba(255,255,255,0.7); line-height:1.8;
+    margin-bottom:0.8rem; animation:fadeUp 1s 0.2s ease both; direction:rtl; text-align:right;
+  }
+  .hero-desc { color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.8; max-width:460px; margin-bottom:2rem; animation:fadeUp 1s 0.3s ease both; }
+  .hero-buttons { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 1s 0.4s ease both; }
+  .btn-primary {
+    background:var(--gold); color:var(--navy); padding:0.9rem 2rem; border-radius:4px;
+    font-weight:700; font-size:0.88rem; text-decoration:none; transition:all 0.3s; display:inline-flex; align-items:center; gap:0.4rem;
+  }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-whatsapp {
+    background:rgba(37,211,102,0.15); border:1px solid rgba(37,211,102,0.4); color:#25d366;
+    padding:0.9rem 2rem; border-radius:4px; font-weight:600; font-size:0.88rem;
+    text-decoration:none; transition:all 0.3s; display:inline-flex; align-items:center; gap:0.4rem;
+  }
+  .btn-whatsapp:hover { background:rgba(37,211,102,0.25); }
+
+  .hero-visual { position:relative; z-index:2; animation:fadeIn 1.2s 0.5s ease both; }
+  .hero-cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .h-card {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px; padding:1.3rem; display:flex; flex-direction:column; gap:0.5rem;
+    transition:all 0.3s; cursor:default;
+  }
+  .h-card:hover { background:rgba(26,79,160,0.2); border-color:rgba(26,79,160,0.5); transform:translateY(-3px); }
+  .h-card-icon { font-size:1.8rem; }
+  .h-card h4 { font-size:0.88rem; font-weight:600; }
+  .h-card p { font-size:0.74rem; color:var(--gray); line-height:1.5; }
+  .h-card-wide { grid-column:1/-1; flex-direction:row; align-items:center; gap:1rem; }
+  .h-card-wide .h-card-icon { font-size:2rem; }
+
+  .stats-row {
+    display:flex; gap:0; margin-top:1rem;
+    background:rgba(201,169,110,0.06); border:1px solid rgba(201,169,110,0.15);
+    border-radius:10px; overflow:hidden;
+  }
+  .stat { flex:1; text-align:center; padding:1rem 0.5rem; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:600; color:var(--gold); line-height:1; }
+  .stat-label { font-size:0.65rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem; }
+  .stat + .stat { border-left:1px solid rgba(201,169,110,0.15); }
+
+  /* SECTIONS */
+  section { padding:5.5rem 5%; }
+  .section-tag { display:inline-block; color:var(--teal-light); font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:600; margin-bottom:0.6rem; }
+  .section-tag::before { content:'— '; }
+  h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:300; line-height:1.15; margin-bottom:0.8rem; }
+  h2 span { color:var(--gold); font-style:italic; }
+
+  /* ABOUT */
+  .about { background:linear-gradient(180deg,var(--navy) 0%,var(--deep) 100%); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .about-text p { color:rgba(255,255,255,0.65); line-height:1.85; margin-bottom:1rem; font-size:0.92rem; }
+  .about-features { display:flex; flex-direction:column; gap:0.8rem; margin-top:1.5rem; }
+  .feature-item {
+    display:flex; align-items:flex-start; gap:1rem;
+    padding:1rem 1.2rem; border-left:2px solid var(--teal);
+    background:rgba(26,107,114,0.08); border-radius:0 8px 8px 0; transition:all 0.3s;
+  }
+  .feature-item:hover { background:rgba(26,107,114,0.18); border-left-color:var(--gold); }
+  .feature-icon { font-size:1.2rem; flex-shrink:0; }
+  .feature-item h4 { font-size:0.88rem; font-weight:600; margin-bottom:0.2rem; }
+  .feature-item p { font-size:0.78rem; color:var(--gray); line-height:1.5; }
+
+  .about-visual {
+    background:linear-gradient(135deg,rgba(26,79,160,0.15) 0%,rgba(26,107,114,0.1) 100%);
+    border:1px solid rgba(201,169,110,0.2); border-radius:16px; padding:2rem;
+  }
+  .value-cards { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+  .v-card {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+    border-radius:10px; padding:1.2rem; text-align:center; transition:all 0.3s;
+  }
+  .v-card:hover { border-color:rgba(201,169,110,0.4); background:rgba(201,169,110,0.06); }
+  .v-card span { font-size:1.8rem; display:block; margin-bottom:0.5rem; }
+  .v-card h4 { font-size:0.82rem; font-weight:600; margin-bottom:0.2rem; }
+  .v-card p { font-size:0.7rem; color:var(--gray); }
+  .motto {
+    margin-top:1.2rem; text-align:center; padding:1rem;
+    background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(201,169,110,0.04));
+    border-radius:10px; border:1px solid rgba(201,169,110,0.2);
+  }
+  .motto strong { display:block; font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--gold); margin-bottom:0.2rem; }
+  .motto p { font-size:0.78rem; color:rgba(255,255,255,0.55); font-style:italic; }
+
+  /* SERVICES — TWO TABS */
+  .services { background:var(--deep); }
+  .services-header { text-align:center; max-width:620px; margin:0 auto 2.5rem; }
+  .services-header p { color:var(--gray); line-height:1.8; font-size:0.92rem; }
+  .tab-buttons { display:flex; justify-content:center; gap:1rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+  .tab-btn {
+    padding:0.7rem 2rem; border-radius:50px; font-size:0.85rem; font-weight:600;
+    cursor:pointer; border:1px solid rgba(255,255,255,0.15); background:transparent;
+    color:rgba(255,255,255,0.6); transition:all 0.3s; letter-spacing:0.04em;
+  }
+  .tab-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+  .tab-btn:hover:not(.active) { border-color:var(--gold); color:var(--gold); }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.3rem; }
+
+  .service-card {
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px; padding:1.8rem; position:relative; overflow:hidden; transition:all 0.4s;
+  }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--blue),var(--teal-light));
+    transform:scaleX(0); transform-origin:left; transition:transform 0.4s;
+  }
+  .service-card:hover { border-color:rgba(26,79,160,0.5); background:rgba(26,79,160,0.1); transform:translateY(-4px); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-card.blood::before { background:linear-gradient(90deg,var(--red),var(--red-light)); }
+  .service-card.blood:hover { border-color:rgba(192,57,43,0.5); background:rgba(192,57,43,0.08); }
+  .service-icon { font-size:2rem; margin-bottom:0.8rem; display:block; }
+  .service-card h3 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
+  .service-card p { font-size:0.8rem; color:var(--gray); line-height:1.7; }
+  .service-tag {
+    display:inline-block; margin-top:1rem; padding:0.25rem 0.8rem;
+    background:rgba(26,79,160,0.2); color:#7eb3ff; border-radius:50px; font-size:0.68rem;
+  }
+  .service-tag.red { background:rgba(192,57,43,0.2); color:#ff8a80; }
+  .service-tag.green { background:rgba(26,107,114,0.2); color:var(--teal-light); }
+
+  /* BLOOD SPECIAL SECTION */
+  .blood-banner {
+    margin-top:2rem; padding:1.5rem 2rem;
+    background:linear-gradient(135deg,rgba(192,57,43,0.2),rgba(192,57,43,0.08));
+    border:1px solid rgba(192,57,43,0.35); border-radius:14px;
+    display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .blood-banner-icon { font-size:3rem; animation:pulse 2s infinite; }
+  .blood-banner-text h3 { font-size:1.1rem; font-weight:700; color:#ff6b6b; margin-bottom:0.3rem; }
+  .blood-banner-text p { font-size:0.85rem; color:rgba(255,255,255,0.65); line-height:1.6; }
+  .blood-types { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.8rem; }
+  .blood-type {
+    padding:0.3rem 0.7rem; border-radius:6px; font-size:0.78rem; font-weight:700;
+    background:rgba(192,57,43,0.25); border:1px solid rgba(192,57,43,0.4); color:#ff8a80;
+  }
+  .blood-cta {
+    margin-left:auto; background:var(--red); color:var(--white);
+    padding:0.8rem 1.5rem; border-radius:6px; font-weight:700; font-size:0.85rem;
+    text-decoration:none; white-space:nowrap; transition:all 0.3s;
+  }
+  .blood-cta:hover { background:var(--red-light); transform:translateY(-2px); }
+
+  /* HOW */
+  .how { background:linear-gradient(180deg,var(--deep) 0%,var(--navy) 100%); text-align:center; }
+  .how > p { color:var(--gray); margin-bottom:3rem; font-size:0.92rem; }
+  .steps { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; position:relative; }
+  .step { flex:1; min-width:150px; max-width:190px; padding:0 0.5rem; }
+  .step-circle {
+    width:72px; height:72px; border-radius:50%; margin:0 auto 1.2rem;
+    background:var(--deep); border:2px solid rgba(201,169,110,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:1.5rem; position:relative; transition:all 0.3s;
+  }
+  .step:hover .step-circle { border-color:var(--teal-light); background:rgba(26,107,114,0.2); }
+  .step-num {
+    position:absolute; top:-4px; right:-4px; width:22px; height:22px;
+    border-radius:50%; background:var(--gold); color:var(--navy);
+    font-size:0.62rem; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+  .step h4 { font-size:0.88rem; font-weight:600; margin-bottom:0.4rem; }
+  .step p { font-size:0.75rem; color:var(--gray); line-height:1.6; }
+
+  /* TESTIMONIALS */
+  .testimonials { background:var(--navy); }
+  .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.3rem; margin-top:2.5rem; }
+  .t-card {
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px; padding:1.8rem; transition:all 0.3s;
+  }
+  .t-card:hover { border-color:rgba(201,169,110,0.3); }
+  .quote { font-family:'Cormorant Garamond',serif; font-size:4rem; color:rgba(201,169,110,0.2); line-height:0.6; margin-bottom:0.8rem; display:block; }
+  .stars { color:var(--gold); font-size:0.75rem; margin-bottom:0.8rem; }
+  .t-card p { font-size:0.85rem; color:rgba(255,255,255,0.72); line-height:1.8; margin-bottom:1.2rem; font-style:italic; }
+  .t-author { display:flex; align-items:center; gap:0.8rem; }
+  .t-avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--teal)); display:flex; align-items:center; justify-content:center; font-size:1rem; }
+  .t-name { font-size:0.82rem; font-weight:600; }
+  .t-role { font-size:0.7rem; color:var(--gray); }
+
+  /* CONTACT */
+  .contact { background:var(--deep); }
+  .contact-wrapper { display:grid; grid-template-columns:1fr 1.2fr; gap:4rem; align-items:start; }
+  .contact-info h2 { margin-bottom:0.8rem; }
+  .contact-info > p { color:var(--gray); line-height:1.8; font-size:0.88rem; margin-bottom:1.5rem; }
+  .contact-items { display:flex; flex-direction:column; gap:1rem; }
+  .c-item {
+    display:flex; align-items:center; gap:1rem; padding:0.9rem 1.1rem;
+    border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); transition:all 0.3s;
+  }
+  .c-item:hover { border-color:rgba(201,169,110,0.3); }
+  .c-icon { width:40px; height:40px; border-radius:8px; background:linear-gradient(135deg,rgba(26,79,160,0.4),rgba(26,107,114,0.3)); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+  .c-label { font-size:0.68rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.07em; }
+  .c-value { font-size:0.88rem; font-weight:600; margin-top:0.1rem; }
+  .c-value a { color:var(--white); text-decoration:none; }
+
+  .contact-form { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:2.2rem; }
+  .contact-form h3 { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:300; margin-bottom:1.3rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem; margin-bottom:0.9rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.9rem; }
+  .form-group label { font-size:0.72rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.07em; }
+  .form-group input,.form-group select,.form-group textarea {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    border-radius:6px; padding:0.75rem 0.9rem; color:var(--white);
+    font-family:'DM Sans',sans-serif; font-size:0.86rem; outline:none; transition:border-color 0.3s; resize:vertical;
+  }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--teal-light); }
+  .form-group select option { background:var(--deep); color:var(--white); }
+  .btn-submit {
+    width:100%; padding:0.95rem; background:var(--gold); color:var(--navy);
+    border:none; border-radius:6px; font-family:'DM Sans',sans-serif;
+    font-size:0.9rem; font-weight:700; cursor:pointer; transition:all 0.3s; margin-top:0.3rem;
+  }
+  .btn-submit:hover { background:var(--gold-light); transform:translateY(-2px); }
+  #form-success {
+    display:none; background:rgba(26,107,114,0.2); border:1px solid var(--teal-light);
+    border-radius:10px; padding:1.5rem; text-align:center; margin-bottom:1rem;
+  }
+
+  /* FOOTER */
+  footer { background:#060f1e; padding:3rem 5% 1.5rem; border-top:1px solid rgba(201,169,110,0.1); }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:2.5rem; margin-bottom:2.5rem; }
+  .footer-brand p { color:var(--gray); font-size:0.8rem; line-height:1.8; margin:0.8rem 0 1.2rem; }
+  .footer-links h5 { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); margin-bottom:1rem; font-weight:600; }
+  .footer-links ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+  .footer-links a { text-decoration:none; color:var(--gray); font-size:0.8rem; transition:color 0.3s; }
+  .footer-links a:hover { color:var(--white); }
+  .social-links { display:flex; gap:0.7rem; }
+  .social-link {
+    width:32px; height:32px; border-radius:6px; border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem;
+    text-decoration:none; color:var(--gray); transition:all 0.3s;
+  }
+  .social-link:hover { border-color:var(--teal-light); color:var(--teal-light); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.06); padding-top:1.3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem; }
+  .footer-bottom p { font-size:0.73rem; color:var(--gray); }
+
+  /* FLOATING CALL BTN */
+  .float-call {
+    position:fixed; bottom:2rem; right:2rem; z-index:999;
+    background:var(--gold); color:var(--navy); width:58px; height:58px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; text-decoration:none; box-shadow:0 4px 20px rgba(201,169,110,0.4);
+    animation:pulse 2.5s infinite; transition:all 0.3s;
+  }
+  .float-call:hover { background:var(--gold-light); transform:scale(1.1); }
+
+  /* REVEAL */
+  .reveal { opacity:0; transform:translateY(25px); transition:all 0.65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px) {
+    .hero { grid-template-columns:1fr; padding-top:5.5rem; text-align:center; }
+    .hero-desc { margin:0 auto 1.5rem; }
+    .hero-buttons { justify-content:center; }
+    .about,.contact-wrapper { grid-template-columns:1fr; gap:2.5rem; }
+    .footer-top { grid-template-columns:1fr 1fr; }
+    .nav-links { display:none; }
+    .hero-arabic { text-align:center; }
+  }
+  @media(max-width:600px) {
+    .form-row { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; }
+    .hero-cards-grid { grid-template-columns:1fr; }
+    .blood-banner { flex-direction:column; text-align:center; }
+    .blood-cta { margin:0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING CALL -->
+<a href="tel:01029897971" class="float-call" title="Call Now">📞</a>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-icon">🏥</div>
+    <div class="logo-text">Hikal's Company<span>Medical Services</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:01029897971" class="nav-phone">📞 01029897971</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">خدمات طبية متكاملة — Full Medical Care</div>
+    <h1>
+      رعاية تطمنك<br>
+      <em>في البيت</em> و<br>
+      <strong>المستشفى</strong>
+    </h1>
+    <p class="hero-arabic">محتاج رعاية طبية مضمونة وسريعة؟ متسيبش صحة حبايبك للصدفة!</p>
+    <p class="hero-desc">Hikal's Company provides complete medical services at home and in hospitals — fast response, affordable prices, and full commitment.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">📋 Book Now</a>
+      <a href="https://wa.me/201029897971" target="_blank" class="btn-whatsapp">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-cards-grid">
+      <div class="h-card">
+        <div class="h-card-icon">🏠</div>
+        <h4>Home Services</h4>
+        <p>Nursing, doctors, physiotherapy & medical devices at your door</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">🏥</div>
+        <h4>Hospital Services</h4>
+        <p>ICU, emergency & incubator care in partner hospitals</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">🩸</div>
+        <h4>Blood Bags</h4>
+        <p>All blood types available fast & safely</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">💧</div>
+        <h4>Home Dialysis</h4>
+        <p>Kidney dialysis at home with certified equipment</p>
+      </div>
+      <div class="h-card h-card-wide">
+        <div class="h-card-icon">⏰</div>
+        <div>
+          <h4>خدمة سريعة · أسعار مناسبة · التزام كامل</h4>
+          <p>Fast service · Affordable prices · Full commitment — available 24/7</p>
+        </div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Available</div></div>
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Services</div></div>
+      <div class="stat"><div class="stat-num">All</div><div class="stat-label">Blood Types</div></div>
+      <div class="stat"><div class="stat-num">Fast</div><div class="stat-label">Response</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text reveal">
+    <span class="section-tag">Who We Are</span>
+    <h2>Hikal's Company — <span>رعاية متكاملة</span></h2>
+    <p>Hikal's Company was founded to bring trusted, high-quality medical care directly to patients — whether at home or inside hospitals — with the highest level of safety and professionalism.</p>
+    <p>We believe that quality healthcare should be accessible, fast, and affordable for every Egyptian family.</p>
+    <div class="about-features">
+      <div class="feature-item">
+        <span class="feature-icon">👩‍⚕️</span>
+        <div><h4>Licensed Nursing Staff</h4><p>All nurses hold valid, government-issued nursing licenses.</p></div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔍</span>
+        <div><h4>Personally Vetted Team</h4><p>Every professional is personally interviewed and verified before joining.</p></div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">⚡</span>
+        <div><h4>Fast Response</h4><p>Assignment confirmed quickly — we understand that health cannot wait.</p></div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💰</span>
+        <div><h4>Affordable Prices</h4><p>أسعار مناسبة — Quality care at prices the whole family can afford.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="value-cards">
+      <div class="v-card"><span>🏠</span><h4>Home-Based</h4><p>Full medical care at your home</p></div>
+      <div class="v-card"><span>🏥</span><h4>Hospital-Grade</h4><p>ICU & emergency level care</p></div>
+      <div class="v-card"><span>⏱️</span><h4>Quick Booking</h4><p>Fast confirmation, same day</p></div>
+      <div class="v-card"><span>🤝</span><h4>Personal Support</h4><p>Direct team, no bots</p></div>
+    </div>
+    <div class="motto">
+      <strong>"رعاية تطمنك قبل ما تطمن مريضك"</strong>
+      <p>Care that reassures you before it reassures your patient ❤️</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <span class="section-tag">What We Offer</span>
+    <h2>All Our <span>Services</span></h2>
+    <p>From home nursing to hospital ICU and blood supply — Hikal's Company covers every medical need with speed and professionalism.</p>
+  </div>
+
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('home',this)">🏠 Home Services</button>
+    <button class="tab-btn" onclick="switchTab('hospital',this)">🏥 Hospital Services</button>
+    <button class="tab-btn" onclick="switchTab('blood',this)">🩸 Blood Services</button>
+  </div>
+
+  <!-- HOME SERVICES TAB -->
+  <div class="tab-panel active" id="tab-home">
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">🩺</span>
+        <h3>Home Nursing — تمريض منزلي</h3>
+        <p>Specialized nurses assigned to your home for daily care, post-surgery recovery, chronic illness management, and more.</p>
+        <span class="service-tag green">Home-Based</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">👨‍⚕️</span>
+        <h3>Doctor Home Visits — كشف أطباء</h3>
+        <p>Doctors from all specialties visit your home for diagnosis, examination, and treatment — no need to leave the house.</p>
+        <span class="service-tag green">All Specialties</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🦽</span>
+        <h3>Physiotherapy — علاج طبيعي وتأهيل</h3>
+        <p>Physiotherapy and rehabilitation sessions at home — recovery from injuries, surgeries, and mobility issues.</p>
+        <span class="service-tag green">Rehabilitation</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🔬</span>
+        <h3>Medical Devices — أجهزة طبية</h3>
+        <p>Latest medical equipment available for home use — oxygen machines, monitors, infusion pumps, and more.</p>
+        <span class="service-tag green">Equipment</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">💧</span>
+        <h3>Home Dialysis — غسيل كلوي منزلي</h3>
+        <p>Kidney dialysis performed at home with certified medical staff and proper equipment — safe and comfortable.</p>
+        <span class="service-tag green">Specialized</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🩹</span>
+        <h3>Vacuum Wound Care — جهاز فاكيوم</h3>
+        <p>Vacuum-assisted therapy for chronic wounds and pressure ulcers — advanced treatment delivered at home.</p>
+        <span class="service-tag green">Advanced Care</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOSPITAL SERVICES TAB -->
+  <div class="tab-panel" id="tab-hospital">
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">🫁</span>
+        <h3>ICU Care — رعايات مركزة</h3>
+        <p>Intensive care unit services inside hospitals — certified nursing staff for critical patients needing constant monitoring.</p>
+        <span class="service-tag">Hospital</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🚨</span>
+        <h3>Emergency Services — خدمات طوارئ</h3>
+        <p>Rapid emergency nursing and medical support inside hospital emergency departments — always ready to respond.</p>
+        <span class="service-tag">Emergency</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">👶</span>
+        <h3>Incubators — حضّانات</h3>
+        <p>Newborn incubator care services at the best prices — specialized neonatal nursing staff for premature and critical infants.</p>
+        <span class="service-tag">Neonatal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOOD SERVICES TAB -->
+  <div class="tab-panel" id="tab-blood">
+    <div class="blood-banner reveal">
+      <div class="blood-banner-icon">🩸</div>
+      <div class="blood-banner-text">
+        <h3>Blood Bags — أكياس دم جميع الفصائل</h3>
+        <p>All blood types available quickly and safely. We supply blood bags for urgent medical needs — fast delivery, verified sources, and safe handling.</p>
+        <div class="blood-types">
+          <span class="blood-type">A+</span>
+          <span class="blood-type">A-</span>
+          <span class="blood-type">B+</span>
+          <span class="blood-type">B-</span>
+          <span class="blood-type">AB+</span>
+          <span class="blood-type">AB-</span>
+          <span class="blood-type">O+</span>
+          <span class="blood-type">O-</span>
+        </div>
+      </div>
+      <a href="tel:01029897971" class="blood-cta">📞 Call Now</a>
+    </div>
+    <div class="services-grid" style="margin-top:1.5rem;">
+      <div class="service-card blood reveal">
+        <span class="service-icon">🩸</span>
+        <h3>All Blood Types</h3>
+        <p>جميع الفصائل متوفرة — A, B, AB, O — positive and negative. Fast supply for surgeries and emergencies.</p>
+        <span class="service-tag red">Urgent Available</span>
+      </div>
+      <div class="service-card blood reveal">
+        <span class="service-icon">⚡</span>
+        <h3>Fast & Safe Delivery</h3>
+        <p>Blood bags delivered quickly with full safety protocols. Verified sources and proper cold-chain handling guaranteed.</p>
+        <span class="service-tag red">Fast Response</span>
+      </div>
+      <div class="service-card blood reveal">
+        <span class="service-icon">📞</span>
+        <h3>24/7 Blood Hotline</h3>
+        <p>Available around the clock for urgent blood requests. Call us anytime — we respond immediately to save lives.</p>
+        <span class="service-tag red">24/7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <span class="section-tag" style="display:block;margin-bottom:0.5rem;">Simple Process</span>
+  <h2>How It <span>Works</span></h2>
+  <p>Getting medical care from Hikal's Company is simple, fast, and transparent.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-circle">📋<span class="step-num">1</span></div>
+      <h4>Contact Us</h4>
+      <p>Call, WhatsApp, or fill the booking form with your medical need.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">🔍<span class="step-num">2</span></div>
+      <h4>Assessment</h4>
+      <p>We assess your needs and match the right professional for your case.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">✅<span class="step-num">3</span></div>
+      <h4>Confirmation</h4>
+      <p>Receive confirmation with staff details and arrival time quickly.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">🏠<span class="step-num">4</span></div>
+      <h4>Care Begins</h4>
+      <p>Your professional arrives on time and delivers exceptional care.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">📊<span class="step-num">5</span></div>
+      <h4>Follow-Up</h4>
+      <p>We follow up on patient progress and adjust care as needed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <span class="section-tag">Patient Stories</span>
+  <h2>Trusted by <span>Our Patients</span></h2>
+  <div class="testimonials-grid">
+    <div class="t-card reveal">
+      <span class="quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>الممرضة من Hikal's Company كانت محترفة جداً ومبتسمة. أمي تعافت من العملية بسرعة كبيرة في البيت. أنصح الكل بيهم.</p>
+      <div class="t-author"><div class="t-avatar">👩</div><div><div class="t-name">سارة م.</div><div class="t-role">Home Care — Cairo</div></div></div>
+    </div>
+    <div class="t-card reveal">
+      <span class="quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>احتجنا كيس دم بشكل عاجل وكان الرد سريع جداً. خدمة ممتازة وموثوقة. شكراً Hikal's Company على الاستجابة السريعة.</p>
+      <div class="t-author"><div class="t-avatar">👨</div><div><div class="t-name">كريم ر.</div><div class="t-role">Blood Service — Giza</div></div></div>
+    </div>
+    <div class="t-card reveal">
+      <span class="quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>جلسات العلاج الطبيعي في البيت غيرت حياة والدي. الفريق محترف والأسعار مناسبة جداً. بنصح بيهم بجد.</p>
+      <div class="t-author"><div class="t-avatar">👩‍⚕️</div><div><div class="t-name">منى ع.</div><div class="t-role">Physiotherapy — Alexandria</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <span class="section-tag">Get In Touch</span>
+      <h2>Book a <span>Service Today</span></h2>
+      <p>سواء محتاج تمريض منزلي، خدمات مستشفى، أو أكياس دم — فريقنا جاهز يساعدك 24 ساعة في اليوم.</p>
+      <div class="contact-items">
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div><div class="c-label">Phone / Hotline</div><div class="c-value"><a href="tel:01029897971">01029897971</a></div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">💬</div>
+          <div><div class="c-label">WhatsApp</div><div class="c-value"><a href="https://wa.me/201029897971" target="_blank">01029897971</a></div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📧</div>
+          <div><div class="c-label">Email</div><div class="c-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe2e0e7eee2e2eaeba1eeedebeee3e3eee7a1ebeacfe8e2eee6e3a1ece0e2">[email&#160;protected]</a></div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div><div class="c-label">Coverage</div><div class="c-value">Egypt — Nationwide</div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🕐</div>
+          <div><div class="c-label">Availability</div><div class="c-value">24 / 7 — 365 Days</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <h3>Book a Service — احجز الآن</h3>
+      <div id="form-success">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">✅</div>
+        <div style="font-weight:600;margin-bottom:0.3rem;">Request Submitted!</div>
+        <div style="font-size:0.8rem;color:var(--gray);">سنتواصل معك خلال أقل وقت ممكن. We'll contact you ASAP!</div>
+      </div>
+      <form id="booking-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="f-name" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="01x xxxx xxxx" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Type *</label>
+          <select id="f-service" name="service" required>
+            <option value="">اختر الخدمة — Select a service...</option>
+            <optgroup label="🏠 Home Services">
+              <option>Home Nursing — تمريض منزلي</option>
+              <option>Doctor Home Visit — كشف طبيب</option>
+              <option>Physiotherapy — علاج طبيعي</option>
+              <option>Medical Devices — أجهزة طبية</option>
+              <option>Home Dialysis — غسيل كلوي منزلي</option>
+              <option>Vacuum Wound Care — جهاز فاكيوم</option>
+            </optgroup>
+            <optgroup label="🏥 Hospital Services">
+              <option>ICU Care — رعاية مركزة</option>
+              <option>Emergency Service — طوارئ</option>
+              <option>Incubator — حضانة</option>
+            </optgroup>
+            <optgroup label="🩸 Blood Services">
+              <option>Blood Bag — كيس دم</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="f-date" name="start_date">
+          </div>
+          <div class="form-group">
+            <label>Duration</label>
+            <select id="f-duration" name="duration">
+              <option>Day Shift (8hrs)</option>
+              <option>Night Shift (8hrs)</option>
+              <option>Full Day (24hrs)</option>
+              <option>Weekly Package</option>
+              <option>Monthly Package</option>
+              <option>One-time Visit</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes — ملاحظات</label>
+          <textarea id="f-notes" name="notes" rows="3" placeholder="Describe the medical condition or any special requirements..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">📩 Submit Request — إرسال الطلب</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">
+        <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🏥</div>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--gold);">Hikal's Company</span>
+      </div>
+      <p>خدمات طبية متكاملة في المنزل والمستشفى. رعاية تطمنك قبل ما تطمن مريضك ❤️</p>
+      <div class="social-links">
+        <a href="#" class="social-link">f</a>
+        <a href="https://wa.me/201029897971" class="social-link">wa</a>
+        <a href="#" class="social-link">ig</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h5>Home Services</h5>
+      <ul>
+        <li><a href="#">Home Nursing</a></li>
+        <li><a href="#">Doctor Visits</a></li>
+        <li><a href="#">Physiotherapy</a></li>
+        <li><a href="#">Home Dialysis</a></li>
+        <li><a href="#">Vacuum Wound Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h5>Hospital Services</h5>
+      <ul>
+        <li><a href="#">ICU Care</a></li>
+        <li><a href="#">Emergency</a></li>
+        <li><a href="#">Incubators</a></li>
+        <li><a href="#">Blood Bags</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:01029897971">📞 01029897971</a></li>
+        <li><a href="https://wa.me/201029897971">💬 WhatsApp</a></li>
+        <li><a href="#contact">Book Online</a></li>
+        <li><a href="#">Emergency Line</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Hikal's Company. All rights reserved.</p>
+    <p>🏥 خدمة سريعة · أسعار مناسبة · التزام كامل</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const FORMSPREE_ID   = 'xaqpojqz';
+  const WHATSAPP_NUMBER = '201029897971';
+
+  // Tab switching
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow =
+      window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
+  });
+
+  // Form submit
+  document.getElementById('booking-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = '⏳ Sending...';
+    btn.disabled = true;
+
+    const name     = document.getElementById('f-name').value.trim();
+    const phone    = document.getElementById('f-phone').value.trim();
+    const service  = document.getElementById('f-service').value;
+    const date     = document.getElementById('f-date').value;
+    const duration = document.getElementById('f-duration').value;
+    const notes    = document.getElementById('f-notes').value.trim();
+
+    // 1️⃣ Email via Formspree
+    try {
+      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name, phone, service,
+          start_date: date, duration, notes,
+          _subject: `🏥 طلب جديد — ${service} — ${name}`
+        })
+      });
+    } catch(err) { console.error(err); }
+
+    // 2️⃣ WhatsApp pre-filled message
+    const msg =
+      `🏥 *طلب جديد — Hikal's Company*\n\n` +
+      `👤 *الاسم:* ${name}\n` +
+      `📞 *التليفون:* ${phone}\n` +
+      `🩺 *الخدمة:* ${service}\n` +
+      `📅 *التاريخ:* ${date || 'Not specified'}\n` +
+      `⏱️ *المدة:* ${duration}\n` +
+      `📝 *ملاحظات:* ${notes || 'None'}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?te
